@@ -4,3 +4,6 @@ class Moves:
         self.down = [1, 0]
         self.left = [0, -1]
         self.right = [0, 1]
+
+
+moves = Moves()

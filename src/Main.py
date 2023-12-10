@@ -14,56 +14,55 @@ moves = Moves()
 initial_state = State(board)
 
 
-# check it a cell can be T and I
-# check a cell like 50T in string seperation
-# count number of all targets and visited targets for end of algorithm
+for state in initial_state.successor():
+    state.print()
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.down)
+# initial_state.move(moves.down)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.down)
+# initial_state.move(moves.down)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.right)
+# initial_state.move(moves.right)
 
-initial_state.print()
+# initial_state.print()
 
-initial_state.move(moves.left)
+# initial_state.move(moves.left)
 
-initial_state.print()
+# initial_state.print()

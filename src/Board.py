@@ -6,6 +6,7 @@ class Board:
         self.grid = grid
         self.rows = len(grid)
         self.cols = len(grid[0])
+        self.num_targets = self.get_number_of_targets()
 
     def get_value(self, row, col):
         try:
@@ -25,15 +26,18 @@ class Board:
                 return 5
             case 'I':
                 return 12
-            case default:
-                return 0
-
-    def visit_target(self, row, col):
-        if (self.is_target(row, col)):
-            self.grid[row][col] = self.get_value(row, col)
+        return 0
 
     def is_wall(self, row, col):
         return re.sub(r'\d+', '', self.grid[row][col]) == 'X'
+
+    def get_number_of_targets(self):
+        count = 0
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if re.sub(r'\d+', '', self.grid[row][col]) == 'T':
+                    count += 1
+        return count
 
     def get_initial_position(self):
         for row in range(self.rows):
