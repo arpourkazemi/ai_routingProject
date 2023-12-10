@@ -13,9 +13,11 @@ moves = Moves()
 
 initial_state = State(board)
 
+print(board.compare(initial_state.board))
+
 
 for state in initial_state.successor():
-    state.print()
+    print(board.compare(state.board))
 
 # initial_state.print()
 

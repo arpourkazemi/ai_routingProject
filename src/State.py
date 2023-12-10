@@ -54,7 +54,6 @@ class State:
 
     def successor(self) -> List['State']:
         possible_states = []
-        # for move in moves:
         for attr, value in vars(moves).items():
             if self.can_move(value):
                 newState = copy.deepcopy(self)
