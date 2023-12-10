@@ -14,29 +14,44 @@ class State:
         self.visited_targets = 0
 
     def can_move(self, move):
-        if self.col + move[1] == self.board.cols or self.col + move[1] == -1 or self.row + move[0] == self.board.rows or self.row + move[0] == -1 or self.board.is_wall(self.row + move[0], self.col + move[1]):
+        if self.col + move[1] == self.board.cols:
+            return False
+        elif self.col + move[1] == -1:
+            return False
+        elif self.row + move[0] == self.board.rows:
+            return False
+        elif self.row + move[0] == -1:
+            return False
+        elif self.board.is_wall(self.row + move[0], self.col + move[1]):
             return False
         return True
 
     def move(self, move):
-        if (self.can_move(move)):
-            self.board.grid[self.row][self.col] = str(self.board.get_value(
-                self.row, self.col))
 
-            if (self.is_target(self.row + move[0], self.col + move[1])):
-                self.visit_target(
-                    self.row + move[0], self.col + move[1])
-            elif (self.board.get_bonus(self.row + move[0], self.col + move[1]) != 0):
-                self.use_bonus(self.row +
-                               move[0], self.col + move[1])
-            self.energy -= self.board.get_value(
-                self.row + move[0], self.col + move[1])
+        # delete R from current cell
+        current_cell_value = self.board.get_value(self.row, self.col)
+        self.board.grid[self.row][self.col] = str(current_cell_value)
 
-            self.board.grid[self.row + move[0]][self.col + move[1]] = str(
-                self.board.get_value(self.row + move[0], self.col + move[1])) + 'R'
+        next_row = self.row + move[0]
+        next_col = self.col + move[1]
+        next_cell = (next_row, next_col)
 
-            self.row = self.row + move[0]
-            self.col = self.col + move[1]
+        # visit next cell if it is target
+        if (self.is_target(*next_cell)):
+            self.visit_target(*next_cell)
+
+        # use next cell if it has bonus
+        if (self.board.get_bonus(*next_cell) != 0):
+            self.use_bonus(*next_cell)
+        self.energy -= self.board.get_value(*next_cell)
+
+        # put R in next cell
+        self.board.grid[next_row][next_col] = str(
+            self.board.get_value(*next_cell)) + 'R'
+
+        # move delivery to next cell
+        self.row = next_row
+        self.col = next_col
 
     def is_target(self, row, col):
         return re.sub(r'\d+', '', self.board.grid[row][col]) == 'T'
