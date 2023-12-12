@@ -58,7 +58,7 @@ class State:
 
     def visit_target(self, row, col):
         if (self.is_target(row, col)):
-            self.board.grid[row][col] = self.board.get_value(row, col)
+            self.board.grid[row][col] = str(self.board.get_value(row, col))
             self.visited_targets += 1
 
     def use_bonus(self, row, col):
