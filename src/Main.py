@@ -2,7 +2,7 @@ import Input
 from Board import Board
 from State import State
 from Moves import moves
-
+from DFS import DFS
 file_path = './test/1.txt'
 
 matrix = Input.read_file(file_path)
@@ -15,6 +15,9 @@ print(board.compare(initial_state.board))
 
 for state in initial_state.successor():
     print(board.compare(state.board))
+
+d= DFS(board)
+d.dfs(initial_state,0)
 
 # initial_state.print()
 
