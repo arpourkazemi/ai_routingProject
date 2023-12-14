@@ -12,6 +12,8 @@ class State:
         self.col = board.get_initial_position()["col"]
         self.energy = 500 - board.get_value(self.row, self.col)
         self.visited_targets = 0
+        self.parent = self
+        self.level = 0
 
     def can_move(self, move):
         if self.col + move[1] == self.board.cols:
@@ -58,7 +60,7 @@ class State:
 
     def visit_target(self, row, col):
         if (self.is_target(row, col)):
-            self.board.grid[row][col] = str(self.board.get_value(row, col))
+            self.board.grid[row][col] = str(self.board.get_value(row, col))+'V'
             self.visited_targets += 1
 
     def use_bonus(self, row, col):
@@ -75,6 +77,7 @@ class State:
                 newState.move(value)
                 possible_states.append(newState)
         return possible_states
+
 
     def print(self):
         print("\n" + "energy: " + str(self.energy))

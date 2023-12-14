@@ -21,10 +21,13 @@ class DFS:
         c = state.col  # col
         self.visited[r][c] = True
         self.distance[r][c] = distance
+        
+        ######
         print(state.row, state.col)
         state.print()
         self.print()
         print('----------------------------')
+        
         suc = state.successor()
         for s in suc:
             if self.visited[s.row][s.col] == False:
@@ -32,6 +35,8 @@ class DFS:
                 self.dfs(s, distance+1)
 
     def print(self):
+        for i in self.parents:
+            print(i)
         # print("Visited:",(str(self.visited[i])+"\n" for i in range(self.visited)))
-        for i in range(len(self.visited)):
-            print(self.visited[i])
+        #for i in range(len(self.visited)):
+         #   print(self.visited[i])

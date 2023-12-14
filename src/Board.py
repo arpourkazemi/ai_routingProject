@@ -49,9 +49,9 @@ class Board:
                     }
                     return current_position
 
-    def compare(self, board: 'Board'):
+    def is_equal(self, board: 'Board'):
         for row in range(self.rows):
             for col in range(self.cols):
-                if self.grid[row][col] is not board.grid[row][col]:
+                if self.grid[row][col] != board.grid[row][col]:
                     return False
         return True
