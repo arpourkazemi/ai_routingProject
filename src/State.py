@@ -78,6 +78,8 @@ class State:
                 possible_states.append(newState)
         return possible_states
 
+    def __lt__(self,other):
+        return self
 
     def print(self):
         print("\n" + "energy: " + str(self.energy))
