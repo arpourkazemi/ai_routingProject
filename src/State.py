@@ -1,3 +1,4 @@
+from Heuristic import Heuristic
 from Board import Board
 from Moves import moves
 from typing import List
@@ -14,6 +15,7 @@ class State:
         self.visited_targets = 0
         self.parent = self
         self.level = 0
+        self.heuristic = 0#Heuristic()
 
     def can_move(self, move):
         if self.col + move[1] == self.board.cols:
