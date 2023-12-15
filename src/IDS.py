@@ -1,14 +1,21 @@
+import time
 import queue
 from State import State
 from Board import Board 
+
+
 class IDS:
+
     def __init__(self, s:State):
+        print("IDS started...")
         self.init_state = s
         self.board = s.board
         self.num_targets = s.board.num_targets
         self.visited = [s.board]
+        start = time.time()
         self.ids()
-    
+        print("Time spent for IDS: ", time.time() - start )
+
     def ids(self):
         l=0
         path = self.dfs(l)
@@ -28,7 +35,6 @@ class IDS:
                 continue
             for next in s.successor():
                 if self.is_visited(next)==False:
-                    #print("notvisited")
                     next.parent = s
                     if next.board.get_number_of_targets() == 0:
                         print("Bingo!")
@@ -38,6 +44,7 @@ class IDS:
                     self.visit(next)
         print("gigigigigi")
         
+    
     def visit(self,state:State):
         self.visited.append(state.board)
 
@@ -45,7 +52,6 @@ class IDS:
     def is_visited(self, s:State):
         for v in self.visited:
             if v.is_equal(s.board):
-                #print("visited")
                 return True
         return False
 
@@ -54,7 +60,8 @@ class IDS:
         while state.parent != state:
             path.append(state.parent)
             state = state.parent
+        path.reverse()
         for p in path:
             p.print()
-        print(len(path))
+        print(f"number of moves: {len(path)} \nremained energy: {path[len(path)-1].energy}")
         return path
