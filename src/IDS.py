@@ -1,40 +1,39 @@
 import time
 import queue
 from State import State
-from Board import Board 
+from Board import Board
 
 
 class IDS:
 
-    def __init__(self, s:State):
+    def __init__(self, s: State):
         print("IDS started...")
         self.init_state = s
         self.board = s.board
         self.num_targets = s.board.num_targets
-        self.visited = [s.board]
+        self.visited = [s]
         start = time.time()
         self.ids()
-        print("Time spent for IDS: ", time.time() - start )
+        print("Time spent for IDS: ", time.time() - start)
 
     def ids(self):
-        l=0
+        l = 0
         path = self.dfs(l)
         while path == None:
-            l+=1
-            self.visited = [self.init_state.board]
+            l += 1
+            self.visited = [self.init_state]
 
             path = self.dfs(l)
 
-
-    def dfs(self,l):
+    def dfs(self, l):
         self.init_state.level = 0
-        stack=[self.init_state]
-        while len(stack)>0:
+        stack = [self.init_state]
+        while len(stack) > 0:
             s = stack.pop()
             if s.level == l:
                 continue
             for next in s.successor():
-                if self.is_visited(next)==False:
+                if self.is_visited(next) == False:
                     next.parent = s
                     if next.board.get_number_of_targets() == 0:
                         print("Bingo!")
@@ -43,19 +42,17 @@ class IDS:
                     stack.append(next)
                     self.visit(next)
         print("gigigigigi")
-        
-    
-    def visit(self,state:State):
-        self.visited.append(state.board)
 
+    def visit(self, state: State):
+        self.visited.append(state)
 
-    def is_visited(self, s:State):
+    def is_visited(self, s: State):
         for v in self.visited:
-            if v.is_equal(s.board):
+            if v.is_equal(s):
                 return True
         return False
 
-    def get_path(self, state:State):
+    def get_path(self, state: State):
         path = [state]
         while state.parent != state:
             path.append(state.parent)
@@ -63,5 +60,6 @@ class IDS:
         path.reverse()
         for p in path:
             p.print()
-        print(f"number of moves: {len(path)} \nremained energy: {path[len(path)-1].energy}")
+        print(
+            f"number of moves: {len(path)} \nremained energy: {path[len(path)-1].energy}")
         return path
