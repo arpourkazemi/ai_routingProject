@@ -47,11 +47,12 @@ class Board:
                         "row": row,
                         "col": col
                     }
-                    return current_position
+                    self.grid[row][col] = str(self.get_value(row, col))
+                    return [row, col]
 
-    def is_equal(self, board: 'Board'):
-        for row in range(self.rows):
-            for col in range(self.cols):
-                if self.grid[row][col] != board.grid[row][col]:
-                    return False
-        return True
+    # def is_equal(self, board: 'Board'):
+    #     for row in range(self.rows):
+    #         for col in range(self.cols):
+    #             if self.grid[row][col] != board.grid[row][col]:
+    #                 return False
+    #     return True
