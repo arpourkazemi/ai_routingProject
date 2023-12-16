@@ -3,7 +3,7 @@ import queue
 from State import State
 from Board import Board
 
-from Utilities import print_yellow, print_red, print_purple
+from Utilities import print_yellow, print_red, print_purple, print_green, print_danger
 
 
 class IDS:
@@ -14,20 +14,23 @@ class IDS:
         self.board = s.board
         self.num_targets = s.board.num_targets
         self.visited = [s]
-        start = time.time()
-        self.ids()
+        max_level = 2**(self.board.cols * self.board.rows)
+        self.start = time.time()
+        self.ids(max_level)
         end = time.time()
-        print_red("Time spent for IDS: " + str(round(end - start, 3)))
+        print_red("Time spent for IDS: " + str(round(end - self.start, 3)))
         print("---------------------------------------------------")
 
-    def ids(self):
+    def ids(self, max_level=1000):
         l = 0
         path = self.dfs(l)
-        while path == None:
+        while path == None and l<max_level:
             l += 1
             self.visited = [self.init_state]
             path = self.dfs(l)
-
+            if time.time() - self.start > 10:
+                break
+        print_danger("There is no route!")
     # handle ids break when no route has been found
 
     def dfs(self, l):
