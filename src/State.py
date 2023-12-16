@@ -1,4 +1,3 @@
-# from Heuristic import Heuristic
 from Board import Board
 from Moves import moves
 from typing import List
@@ -15,7 +14,6 @@ class State:
         self.parent = self
         self.level = 0
         self.path = ''
-        # self.heuristic = 0  # Heuristic()
 
     def can_move(self, move):
         if self.col + move[1] == self.board.cols:
@@ -115,36 +113,6 @@ class State:
                     if self.is_target(x, y):
                         return manhattan_distance + self.board.num_targets - self.visited_targets
 
-                # if (manhattan_distance < 10):
-
-                #     print("md: " + str(manhattan_distance))
-                #     print("hs: " + str(vertical_scrolling))
-
-                # x = vertical_scrolling + self.row
-                # y1 = manhattan_distance - abs(vertical_scrolling) + self.col
-                # y2 = -(manhattan_distance - abs(vertical_scrolling)) + self.col
-                # if (manhattan_distance < 6):
-                #     print("md: " + str(manhattan_distance))
-                #     print("vs: " + str(vertical_scrolling))
-                #     print("c_row: " + str(self.row))
-                #     print("c_col: " + str(self.col))
-                #     print("x: " + str(x))
-                #     print("y1: " + str(y1))
-                #     print("y2: " + str(y2))
-                #     print("--------------")
-                # if (x < 0 or x > self.board.rows or y1 < 0 or y1 > self.board.cols or y2 < 0 or y2 > self.board.cols):
-                #     continue
-
-                # if (x == 5 and y2 == 5):
-                #     print(self.board.grid[5][5])
-                # if (self.board.is_target(x, y1)):
-
-                #     print("Target!")
-                #     return manhattan_distance
-
-                # if (self.board.is_target(x, y2)):
-                #     print("Target!")
-                #     return manhattan_distance
             manhattan_distance += 1
 
     def __lt__(self, other):
