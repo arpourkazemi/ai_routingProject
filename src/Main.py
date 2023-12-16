@@ -8,8 +8,9 @@ from IDS import IDS
 from UCS import UCS
 from BestFS import BestFS
 from Astar import Astar
+from Utilities import print_yellow
 
-file_path = './test/1.txt'
+file_path = './test/2.txt'
 
 matrix = Input.read_file(file_path)
 
@@ -17,7 +18,7 @@ board = Board(matrix)
 
 initial_state = State(board)
 
-# print("---------------------")
+print("---------------------------------------------------")
 b = BFS(initial_state)
 d = DFS(initial_state)
 i = IDS(initial_state)

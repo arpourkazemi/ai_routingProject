@@ -2,19 +2,22 @@ import time
 import queue
 from State import State
 from Board import Board
+from Utilities import print_yellow, print_green, print_purple, print_danger
 
 
 class BestFS:
 
     def __init__(self, s: State):
-        print("Best First Search started...")
+        print_yellow("Best First Search started...\n")
         self.init_state = s
         self.board = s.board
         self.num_targets = s.board.num_targets
         self.visited = [s]
         start = time.time()
         self.bestFS()
-        print("Time spent for Best First Search: ", time.time() - start)
+        end = time.time()
+        print_green("Time spent for BESTFIRST: " + str(round(end - start, 3)))
+        print("---------------------------------------------------")
 
     def bestFS(self):
         pq = queue.PriorityQueue()
@@ -26,12 +29,13 @@ class BestFS:
                 if self.is_visited(next) == False:
                     next.parent = s
                     if next.board.get_number_of_targets() == 0:
-                        print("Bingo!")
-                        return self.get_path(next)
+                        print_purple("PATH: ")
+                        print(next.path + "\n")
+                        return
                     next.level = s.level + 1
                     pq.put((next.heuristic(), next))
                     self.visit(next)
-        print("gigigigigi")
+        print_danger("There is no route!")
 
     def visit(self, state: State):
         self.visited.append(state)

@@ -2,17 +2,21 @@ import time
 import queue
 from State import State
 from Board import Board
+from Utilities import print_yellow, print_green, print_purple, print_danger
 
 
 class Astar:
     def __init__(self, s: State):
+        print_yellow("A* started...\n")
         self.init_state = s
         self.board = s.board
         self.num_targets = s.board.num_targets
         self.visited = [s]
         start = time.time()
         self.a_star()
-        print("Time spent for A* : ", time.time()-start)
+        end = time.time()
+        print_green("Time spent for A*: " + str(round(end - start, 3)))
+        print("---------------------------------------------------")
 
     def a_star(self):
         pq = queue.PriorityQueue()
@@ -20,22 +24,17 @@ class Astar:
         pq.put((self.get_cost(self.init_state), self.init_state))
         while not pq.empty():
             g, s = pq.get()
-            print("----------------------------------")
-            print("q.size: ", pq.qsize())
             for next in s.successor():
-                print('\033[32m')
-                next.print()
-                print('\x1b[0m')
                 if self.is_visited(next) == False:
                     next.parent = s
                     if next.board.get_number_of_targets() == 0:
-                        print("Bingo!")
-                        print(next.path)
+                        print_purple("PATH: ")
+                        print(next.path + "\n")
                         return
                     next.level = s.level + 1
                     pq.put((self.get_cost(next), next))
                     self.visit(next)
-        print("gigigigigi")
+        print_danger("There is no route!")
 
     def get_cost(self, s: State):
         h = s.heuristic()

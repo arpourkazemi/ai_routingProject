@@ -2,11 +2,13 @@ import time
 import queue
 from State import State
 from Board import Board
+import math
+from Utilities import print_yellow, print_blue, print_purple, print_danger
 
 
 class BFS:
     def __init__(self, s: State):
-        print("BFS started...")
+        print("\033[33mBFS started...\n\033[m")
         self.init_state = s
         self.board = s.board
         self.num_targets = s.board.num_targets
@@ -14,7 +16,8 @@ class BFS:
         start = time.time()
         self.bfs()
         end = time.time()
-        print("Time spent for BFS:", end - start)
+        print_blue("Time spent for BFS: " + str(round(end - start, 3)))
+        print("---------------------------------------------------")
 
     def bfs(self):
         q = queue.Queue()
@@ -26,12 +29,13 @@ class BFS:
                 if self.is_visited(next) == False:
                     next.parent = s
                     if next.board.get_number_of_targets() == 0:
-                        print("Bingo!")
-                        return self.get_path(next)
+                        print_purple("PATH: ")
+                        print(next.path + "\n")
+                        return
                     next.level = s.level + 1
                     q.put(next)
                     self.visit(next)
-        print("gigigigigi")
+        print_danger("There is no route!")
 
     def visit(self, state: State):
         self.visited.append(state)

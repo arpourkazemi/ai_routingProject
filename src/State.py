@@ -79,7 +79,7 @@ class State:
             if self.can_move(value):
                 newState = copy.deepcopy(self)
                 newState.move(value)
-                newState.path += str(attr)
+                newState.path += " " + str(attr)
                 possible_states.append(newState)
         return possible_states
 

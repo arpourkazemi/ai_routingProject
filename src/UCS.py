@@ -2,19 +2,22 @@ import time
 import queue
 from State import State
 from Board import Board
+from Utilities import print_yellow, print_blue, print_purple, print_danger
 
 
 class UCS:
 
     def __init__(self, s: State):
-        print("UCS started...")
+        print_yellow("UCS started...\n")
         self.init_state = s
         self.board = s.board
         self.num_targets = s.board.num_targets
         self.visited = [s]
         start = time.time()
         self.ucs()
-        print("Time spent for UCS: ", time.time() - start)
+        end = time.time()
+        print_blue("Time spent for UCS: " + str(round(end - start, 3)))
+        print("---------------------------------------------------")
 
     def ucs(self):
         pq = queue.PriorityQueue()
@@ -26,12 +29,13 @@ class UCS:
                 if self.is_visited(next) == False:
                     next.parent = s
                     if next.board.get_number_of_targets() == 0:
-                        print("Bingo!")
-                        return self.get_path(next)
+                        print_purple("PATH: ")
+                        print(next.path + "\n")
+                        return
                     next.level = s.level + 1
                     pq.put((-next.energy, next))
                     self.visit(next)
-        print("gigigigigi")
+        print_danger("There is no route!")
 
     def visit(self, state: State):
         self.visited.append(state)
