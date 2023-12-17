@@ -10,6 +10,7 @@ class BestFS:
         print_yellow("Best First Search started...\n")
         self.init_state = s
         self.board = s.board
+        s.board.help_h()
         self.num_targets = s.board.num_targets
         self.visited = [s]
         start = time.time()
