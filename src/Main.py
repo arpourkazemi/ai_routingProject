@@ -1,16 +1,14 @@
-import Input
-from Board import Board
-from State import State
-from Moves import moves
-from BFS import BFS
-from DFS import DFS
-from IDS import IDS
-from UCS import UCS
-from BestFS import BestFS
-from Astar import Astar
-from Utilities import print_yellow
+import Utilities.Input as Input
+from Utilities.Board import Board
+from Utilities.State import State
+from Algorithms.Uninformed.BFS import BFS
+from Algorithms.Uninformed.DFS import DFS
+from Algorithms.Uninformed.IDS import IDS
+from Algorithms.Uninformed.UCS import UCS
+from Algorithms.Informed.BestFS import BestFS
+from Algorithms.Informed.Astar import Astar
 
-file_path = './test/2.txt'
+file_path = './test/1.txt'
 
 matrix = Input.read_file(file_path)
 

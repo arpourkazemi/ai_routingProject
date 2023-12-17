@@ -1,9 +1,7 @@
 import time
 import queue
-from State import State
-from Board import Board
-import math
-from Utilities import print_yellow, print_blue, print_purple, print_danger
+from Utilities.State import State
+from Utilities.ColorPrint import print_yellow, print_blue, print_purple, print_danger
 
 
 class BFS:
@@ -31,6 +29,8 @@ class BFS:
                     if next.board.get_number_of_targets() == 0:
                         print_purple("PATH: ")
                         print(next.path + "\n")
+                        print(
+                            f"Moves: {round(len(next.path)/2)} \n\nEnergy: {next.energy}\n")
                         return
                     next.level = s.level + 1
                     q.put(next)
@@ -45,15 +45,3 @@ class BFS:
             if v.is_equal(s):
                 return True
         return False
-
-    def get_path(self, state: State):
-        path = [state]
-        while state.parent != state:
-            path.append(state.parent)
-            state = state.parent
-        path.reverse()
-        for p in path:
-            p.print()
-        print(
-            f"number of moves: {len(path)} \nremained energy: {path[len(path)-1].energy}")
-        return path

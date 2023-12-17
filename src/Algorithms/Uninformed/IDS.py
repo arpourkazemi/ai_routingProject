@@ -1,9 +1,6 @@
 import time
-import queue
-from State import State
-from Board import Board
-
-from Utilities import print_yellow, print_red, print_purple, print_green, print_danger
+from Utilities.State import State
+from Utilities.ColorPrint import print_red, print_purple, print_danger
 
 
 class IDS:
@@ -24,14 +21,14 @@ class IDS:
     def ids(self, max_level=1000):
         l = 0
         path = self.dfs(l)
-        while path == None and l<max_level:
+        while path == None and l < max_level:
             l += 1
             self.visited = [self.init_state]
             path = self.dfs(l)
             if time.time() - self.start > 10:
                 break
-        print_danger("There is no route!")
-    # handle ids break when no route has been found
+        if path == None:
+            print_danger("There is no route!")
 
     def dfs(self, l):
         self.init_state.level = 0
@@ -46,6 +43,8 @@ class IDS:
                     if next.board.get_number_of_targets() == 0:
                         print_purple("PATH: ")
                         print(next.path + "\n")
+                        print(
+                            f"Moves: {round(len(next.path)/2)} \n\nEnergy: {next.energy}\n")
                         return next.path
                     next.level = s.level + 1
                     stack.append(next)
@@ -59,15 +58,3 @@ class IDS:
             if v.is_equal(s):
                 return True
         return False
-
-    def get_path(self, state: State):
-        path = [state]
-        while state.parent != state:
-            path.append(state.parent)
-            state = state.parent
-        path.reverse()
-        for p in path:
-            p.print()
-        print(
-            f"number of moves: {len(path)} \nremained energy: {path[len(path)-1].energy}")
-        return path

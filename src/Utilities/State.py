@@ -1,5 +1,5 @@
-from Board import Board
-from Moves import moves
+from Utilities.Board import Board
+from Utilities.Moves import moves
 from typing import List
 import copy
 import re
@@ -29,29 +29,15 @@ class State:
         return True
 
     def move(self, move):
-
-        # delete R from current cell
         current_cell_value = self.board.get_value(self.row, self.col)
         self.board.grid[self.row][self.col] = str(current_cell_value)
 
         next_row = self.row + move[0]
         next_col = self.col + move[1]
         next_cell = (next_row, next_col)
-
-        # visit next cell if it is target
-        # if (self.is_target(*next_cell)):
-        #     self.visit_target(*next_cell)
-
-        # use next cell if it has bonus
         if (self.board.get_bonus(*next_cell) != 0):
             self.use_bonus(*next_cell)
         self.energy -= self.board.get_value(*next_cell)
-
-        # put R in next cell
-        # self.board.grid[next_row][next_col] = str(
-        #     self.board.get_value(*next_cell)) + 'R'
-
-        # move delivery to next cell
         self.row = next_row
         self.col = next_col
 
