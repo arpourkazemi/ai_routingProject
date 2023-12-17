@@ -7,6 +7,15 @@ class Board:
         self.rows = len(grid)
         self.cols = len(grid[0])
         self.num_targets = self.get_number_of_targets()
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if not self.is_wall(row, col):
+                    try:
+                        self.grid[row][col] = str(self.get_value(
+                            row, col) + 20) + re.sub(r'\d+', '', self.grid[row][col])
+                    except Exception as e:
+                        self.grid[row][col] = str(self.get_value(
+                            row, col) + 20)
 
     def get_value(self, row, col):
         try:

@@ -29,8 +29,10 @@ class BFS:
                     if next.board.get_number_of_targets() == 0:
                         print_purple("PATH: ")
                         print(next.path + "\n")
+                        moves = round(len(next.path)/2)
+                        energy = next.energy + ((moves + 1) * 20)
                         print(
-                            f"Moves: {round(len(next.path)/2)} \n\nEnergy: {next.energy}\n")
+                            f"Moves: {moves} \n\nEnergy: {energy}\n")
                         return
                     next.level = s.level + 1
                     q.put(next)
