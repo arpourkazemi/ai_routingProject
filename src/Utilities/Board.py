@@ -7,6 +7,8 @@ class Board:
         self.rows = len(grid)
         self.cols = len(grid[0])
         self.num_targets = self.get_number_of_targets()
+    
+    def help_h(self):
         for row in range(self.rows):
             for col in range(self.cols):
                 if not self.is_wall(row, col):
@@ -16,6 +18,8 @@ class Board:
                     except Exception as e:
                         self.grid[row][col] = str(self.get_value(
                             row, col) + 20)
+
+    
 
     def get_value(self, row, col):
         try:
