@@ -8,7 +8,7 @@ from Algorithms.Uninformed.UCS import UCS
 from Algorithms.Informed.BestFS import BestFS
 from Algorithms.Informed.Astar import Astar
 
-file_path = './test/1.txt'
+file_path = './test/6.txt'
 
 matrix = Input.read_file(file_path)
 
